@@ -2,34 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mirror;
 
-public class Snake : MonoBehaviour
+public class Snake : NetworkBehaviour
 {
-    [SerializeField] float speed = 3f, rotationSpeed = 180f, speedChange = 0.5f;
-    [SerializeField] GameObject tailPrefab;
+    [SerializeField] float rotationSpeed = 180f, speedChange = 0.5f;
+    [SerializeField]
+    [SyncVar] float speed = 3f;
 
-    public float Speed { get { return speed; } }
-    public List<GameObject> Tails { get; } = new List<GameObject>();
-
-    void Start()
-    {
-        Tails.Add(gameObject);
+    public float Speed 
+    { 
+        get { return speed; }
+        set { speed = value; }
     }
 
+    public override void OnStartServer()
+    {
+        Food.ServerOnFoodEaten += ServerHandleFoodEaten;
+    }
+    public override void OnStopServer()
+    {
+        Food.ServerOnFoodEaten -= ServerHandleFoodEaten;
+    }
+
+    private void ServerHandleFoodEaten(GameObject playerWhoAte)
+    {
+        if(gameObject == playerWhoAte)
+        {
+            Speed += speedChange;
+        }
+    }
+
+    [ClientCallback]
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * Input.GetAxis("Horizontal"));
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Border")) SceneManager.LoadScene(0);
-    }
 
-    public void AddTail()
-    {
-        Instantiate(tailPrefab, Tails[Tails.Count-1].transform.position, Quaternion.identity);
-        speed += speedChange;
-    }
+    
 }
