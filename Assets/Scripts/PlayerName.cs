@@ -9,6 +9,11 @@ public class PlayerName : NetworkBehaviour
     [SerializeField] private TMP_Text playerNameText;
     [SyncVar(hook = nameof(HandlePlayerNameUpdated))] private string playerName;
 
+    public string Name
+    {
+        get { return playerName; }
+    }
+
     public override void OnStartServer()
     {
         playerName = $"Player {connectionToClient.connectionId}";

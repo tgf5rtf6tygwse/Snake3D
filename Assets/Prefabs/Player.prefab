@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 4031708365674451089}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -325,6 +325,8 @@ GameObject:
   - component: {fileID: -2708375247853773439}
   - component: {fileID: 2061989871747999353}
   - component: {fileID: 6171856713065244411}
+  - component: {fileID: 5373754737137966411}
+  - component: {fileID: -399212441282473080}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -441,10 +443,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d024696697c73148a141efd73997a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   rotationSpeed: 180
   speedChange: 0.5
-  tailPrefab: {fileID: 6868670569204301540, guid: f0756ea880ffc1043bf943aabbd94281, type: 3}
+  speed: 3
 --- !u!114 &-807444351598071948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +526,39 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerNameText: {fileID: 3086430512186618499}
+--- !u!114 &5373754737137966411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031708365674451098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab6810bbe4a2e849af86a822539e5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  tailPrefab: {fileID: 6868670569204301540, guid: f0756ea880ffc1043bf943aabbd94281, type: 3}
+--- !u!114 &-399212441282473080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031708365674451098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4171a3c274cf16e469296b2b86e50500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  spawner: {fileID: 5373754737137966411}
+  playerName: {fileID: 6171856713065244411}
 --- !u!1 &4031708365858201725
 GameObject:
   m_ObjectHideFlags: 0
